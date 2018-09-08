@@ -36,11 +36,11 @@ export default class App extends Vue {
   @Prop() private showNav: boolean;
   constructor() {
     super();
-    this.activeBtn =0;
+    this.activeBtn = 0;
     this.showNav = true;
   }
-  navigateToURL(path:string){
-    this.$router.push({path:path});
+  public navigateToURL(path: string) {
+    this.$router.push({path});
   }
 }
 </script>

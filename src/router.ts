@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import Router from 'vue-router';
-import Summary from './components/summary.vue';
+import Summary from './views/summary.vue';
 
 Vue.use(Router);
 
@@ -19,12 +19,12 @@ export default new Router({
     {
       path: '/settings',
       name: 'settings',
-      component: () => import('./components/settings.vue'),
+      component: () => import('./views/settings.vue'),
     },
     {
       path: '/timeline',
       name: 'timeline',
-      component: () => import('./components/timeline.vue'),
+      component: () => import('./views/timeline.vue'),
     },
   ],
 });
