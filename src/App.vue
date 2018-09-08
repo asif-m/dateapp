@@ -9,15 +9,15 @@
 
             <v-footer app height='56px'>
                 <v-bottom-nav :active.sync='activeBtn' :value='showNav' absolute color='transparent'>
-                    <v-btn flat color='teal'>
+                    <v-btn flat color='teal' v-on:click.native='navigateToURL("summary")'>
                         <span>Summary</span>
                         <v-icon>home</v-icon>
                     </v-btn>
-                    <v-btn flat color='teal'>
+                    <v-btn flat color='teal'  v-on:click.native='navigateToURL("timeline")'>
                         <span>Timeline</span>
                         <v-icon>waves</v-icon>
                     </v-btn>
-                    <v-btn flat color='teal'>
+                    <v-btn flat color='teal'  v-on:click.native='navigateToURL("settings")'>
                         <span>Settings</span>
                         <v-icon>settings</v-icon>
                     </v-btn>
@@ -36,8 +36,11 @@ export default class App extends Vue {
   @Prop() private showNav: boolean;
   constructor() {
     super();
-    this.activeBtn = 1;
+    this.activeBtn =0;
     this.showNav = true;
+  }
+  navigateToURL(path:string){
+    this.$router.push({path:path});
   }
 }
 </script>

@@ -12,6 +12,11 @@ export default new Router({
       component: Summary,
     },
     {
+      path: '/summary',
+      name: 'summary',
+      component: Summary,
+    },
+    {
       path: '/settings',
       name: 'settings',
       component: () => import('./components/settings.vue'),
