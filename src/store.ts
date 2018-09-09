@@ -14,6 +14,12 @@ export default new Vuex.Store({
     addEvent(state, event: any) {
       state.events.push(event);
     },
+    removeEvent(state, eventIDToRemove: any) {
+      const index = state.events.findIndex((e) => e.id === eventIDToRemove);
+      if (index !== -1) {
+        state.events.splice(index, 1);
+      }
+    },
   },
   actions: {
     initList({ commit }, events) {
@@ -21,6 +27,9 @@ export default new Vuex.Store({
     },
     addEvent({ commit }, event) {
       commit('addEvent', event);
+    },
+    removeEvent({ commit }, eventIDToRemove) {
+      commit('removeEvent', eventIDToRemove);
     },
   },
   getters: {

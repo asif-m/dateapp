@@ -34,6 +34,7 @@
 <script lang='ts'>
 import { Component, Prop, Vue } from 'vue-property-decorator';
 import EventDataNode from './models/eventdatanode';
+import TimerUtil from './utils/timerutil';
 
 @Component
 export default class App extends Vue {
@@ -43,6 +44,7 @@ export default class App extends Vue {
       super();
       this.activeBtn = 0;
       this.showNav = true;
+      TimerUtil.beginTimer();
       this.$store.dispatch('initList', [
         new EventDataNode('Asif', new Date(1983, 12, 25)),
         new EventDataNode('Shameeha', new Date(1994, 12, 29)),

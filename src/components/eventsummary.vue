@@ -2,12 +2,13 @@
   <div>
     <v-card>
         <v-img height="200px">
-            <div>{{eventname}}</div>
+            <div>{{name}}</div>
             <div>{{date}}</div>
+            <div>{{currentTime}}</div>
         </v-img>
         <v-card-actions>
             <v-spacer></v-spacer>
-            <v-btn icon>
+            <v-btn icon  v-on:click.native='removeEvent()'>
                 <v-icon>create</v-icon>
             </v-btn>
         </v-card-actions>
@@ -17,11 +18,28 @@
 
 <script lang='ts'>
 import { Component, Prop, Vue } from 'vue-property-decorator';
+import TimerUtil from '../utils/timerutil';
 
 @Component
 export default class EventSummaryComponent extends Vue {
-    @Prop() public eventname: string;
+    @Prop() public name: string;
     @Prop() public date: Date;
+    @Prop() public id: string;
+    private currentTime: Date;
+    constructor() {
+        super();
+        this.currentTime = new Date();
+        TimerUtil.subscribe({method: this.onTimer, scope: this});
+    }
+    private onTimer(date: Date) {
+        this.currentTime = date;
+    }
+    private beforeDestroy() {
+        TimerUtil.unsubscribe({method: this.onTimer, scope: this});
+    }
+    private removeEvent() {
+        this.$store.dispatch('removeEvent', this.id);
+    }
 }
 </script>
 
