@@ -1,4 +1,4 @@
-export class EventData {
+export default class EventDataNode {
   public id: string;
   public name: string;
   public date: Date;
@@ -8,4 +8,3 @@ export class EventData {
     this.date = date;
   }
 }
-export let EventDataList: EventData[];

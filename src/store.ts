@@ -1,19 +1,29 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
-import { EventDataList, EventData } from './models/eventdata';
+
 Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    events: EventDataList,
+    events: [],
   },
   mutations: {
-    initList(state, dates: EventDataList) {
-      state.events = dates;
+    initList(state, events: []) {
+      state.events = events;
     },
-    addEvent(state, date: EventData) {
-      state.events.push(date);
+    addEvent(state, event: any) {
+      state.events.push(event);
     },
   },
-  actions: {},
+  actions: {
+    initList({ commit }, events) {
+      commit('initList', events);
+    },
+    addEvent({ commit }, event) {
+      commit('addEvent', event);
+    },
+  },
+  getters: {
+    events: (state) => state.events,
+  },
 });
