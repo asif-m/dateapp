@@ -5,7 +5,10 @@ export interface TimerSubscriptionCallbackData {
 
 export default class TimerUtil {
   public static beginTimer() {
-    setInterval(TimerUtil.timerCallback, 1000);
+    TimerUtil.timerHandle = setInterval(TimerUtil.timerCallback, 1000);
+  }
+  public static stopTimer() {
+    clearInterval(TimerUtil.timerHandle);
   }
   public static subscribe(data: TimerSubscriptionCallbackData) {
     if (!TimerUtil.handlers) {
@@ -22,6 +25,7 @@ export default class TimerUtil {
     );
   }
   private static handlers: TimerSubscriptionCallbackData[];
+  private static timerHandle: any;
   private static fire(data: any) {
     if (!TimerUtil.handlers) {
       TimerUtil.handlers = [];
