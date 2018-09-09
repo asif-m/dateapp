@@ -1,38 +1,36 @@
 <template>
-<div>
-    <v-layout row>
-        <v-flex>
-            <v-card>
-                <v-container fluid grid-list-sm>
-                    <v-layout row wrap>
-                        <v-flex v-for="event in events" :key="event.id" xs2>
-                            <div>
-                            <EventSummaryComponent :eventname=event.name :date=event.date>
-
-                            </EventSummaryComponent>
-                            </div>
-                        </v-flex>
-                    </v-layout>
-                </v-container>
-            </v-card>
-        </v-flex>
-  </v-layout>
-</div>
+    <div>
+        <v-layout row>
+            <v-flex>
+                <v-card>
+                    <v-container fluid grid-list-sm>
+                        <v-layout row wrap>
+                            <v-flex v-for="event in events" :key="event.id" xs2>
+                                <div>
+                                    <EventSummaryComponent :eventname=event.name :date=event.date>
+                                    </EventSummaryComponent>
+                                </div>
+                            </v-flex>
+                        </v-layout>
+                    </v-container>
+                </v-card>
+            </v-flex>
+        </v-layout>
+    </div>
 </template>
 
 <script lang='ts'>
 import { Component, Prop, Vue } from 'vue-property-decorator';
 import EventSummaryComponent from '../components/eventsummary.vue';
+import EventDataNode from '../models/eventdatanode';
 
 @Component({
   components: {EventSummaryComponent},
 })
 export default class Summary extends Vue {
-   private events:[];
-   private name:string;
+private events: EventDataNode[];
   constructor() {
     super();
-    this.name ='Asif';
     this.events = this.$store.getters.events;
   }
 }
