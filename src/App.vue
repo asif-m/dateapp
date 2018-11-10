@@ -35,6 +35,10 @@
 import { Component, Prop, Vue } from 'vue-property-decorator';
 import EventDataNode from './models/eventdatanode';
 import TimerUtil from './utils/timerutil';
+import UniqueIDUtil from './utils/uniqueidutil';
+import MONTH from './constants/month';
+import EVENTTYPE from './constants/eventtype';
+
 
 @Component
 export default class App extends Vue {
@@ -49,20 +53,15 @@ export default class App extends Vue {
       this.$router.push({path});
   }
   public addEvent() {
-      this.$store.dispatch('addEvent', new EventDataNode(null, 'Asif', new Date(1983, 12, 25)));
+      this.$store.dispatch('addEvent',
+        new EventDataNode(UniqueIDUtil.generate(), 'Asif', new Date(1983, MONTH.DEC, 25)));
   }
   private _initStore() {
     this.$store.dispatch('initList', [
-            new EventDataNode(null, 'Asif', new Date(1983, 12, 25)),
-            new EventDataNode(null, 'Shameeha', new Date(1994, 12, 29)),
-            new EventDataNode(null, 'Shameeha2', new Date(1994, 12, 29)),
-            new EventDataNode(null, 'Shameeha3', new Date(1994, 12, 29)),
-            new EventDataNode(null, 'Shameeha4', new Date(1994, 12, 29)),
-            new EventDataNode(null, 'Shameeha5', new Date(1994, 12, 29)),
-            new EventDataNode(null, 'Shameeha6', new Date(1994, 12, 29)),
-            new EventDataNode(null, 'Shameeha7', new Date(1994, 12, 29)),
-            new EventDataNode(null, 'Shameeha8', new Date(1994, 12, 29)),
-            new EventDataNode(null, 'Shameeha9', new Date(1994, 12, 29))]);
+        new EventDataNode(UniqueIDUtil.generate(), 'Asif', new Date(1983, MONTH.DEC, 25), EVENTTYPE.BIRTHDAY),
+        new EventDataNode(UniqueIDUtil.generate(), 'Shameeha', new Date(1994, MONTH.DEC, 29), EVENTTYPE.BIRTHDAY),
+        new EventDataNode(UniqueIDUtil.generate(), 'Asif - Shameeha', new Date(1994, MONTH.DEC, 29), EVENTTYPE.ANNIVERSARY),
+        ]);
     }
 }
 </script>

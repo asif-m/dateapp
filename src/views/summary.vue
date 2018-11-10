@@ -7,7 +7,7 @@
                         <v-layout row wrap>
                             <v-flex v-for="event in events" :key="event.id" xs2>
                                 <div>
-                                    <EventSummaryComponent :id=event.id :name=event.name :date=event.date>
+                                    <EventSummaryComponent :id=event.id :name=event.name :date=event.date :eventType = event.eventType>
                                     </EventSummaryComponent>
                                 </div>
                             </v-flex>

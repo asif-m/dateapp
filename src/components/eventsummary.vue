@@ -4,6 +4,7 @@
         <v-img height="200px">
             <div>{{name}}</div>
             <div>{{date}}</div>
+            <div>{{eventType}}</div>
             <div>{{currentTime}}</div>
         </v-img>
         <v-card-actions>
@@ -25,6 +26,7 @@ export default class EventSummaryComponent extends Vue {
     @Prop() public name: string;
     @Prop() public date: Date;
     @Prop() public id: string;
+    @Prop() public eventType: string;
     private currentTime: Date;
     constructor() {
         super();

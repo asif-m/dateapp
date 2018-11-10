@@ -1,17 +1,19 @@
+import EVENTTYPE from '@/constants/eventtype';
+
 export default class EventDataNode {
-  private static currentUID = 0;
   public id: string;
   public name: string;
+  public eventType: string;
   public date: Date;
-  constructor(id: string, name: string, date: Date) {
-    if (id) {
-      this.id = id;
-    } else {
-      EventDataNode.currentUID++;
-      this.id =
-        EventDataNode.currentUID + '_' + name + '_' + date.toDateString();
-    }
+  constructor(
+    id: string,
+    name: string,
+    date: Date,
+    eventType = EVENTTYPE.NONE,
+  ) {
+    this.id = id;
     this.name = name;
     this.date = date;
+    this.eventType = eventType;
   }
 }
