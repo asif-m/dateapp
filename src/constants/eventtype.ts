@@ -1,6 +1,6 @@
 enum EVENTTYPE {
   NONE = '',
   BIRTHDAY = 'Birthday',
-  ANNIVERSARY = 'Wedding Anniversary',
+  ANNIVERSARY = 'Anniversary',
 }
 export default EVENTTYPE;

@@ -56,14 +56,24 @@ export default class App extends Vue {
       const getRandomNumber = (min: number, max: number)=> {
           return Math.floor(Math.random()*(max-min+1)+min);
       }
+      const getRandomEventType = () => {
+          switch(getRandomNumber(0,2)){
+              case 0: return EVENTTYPE.NONE;
+              case 1: return EVENTTYPE.BIRTHDAY;
+              case 2: return EVENTTYPE.ANNIVERSARY;
+          }
+      } 
       this.$store.dispatch('addEvent',
         new EventDataNode(UniqueIDUtil.generate(), 'Random', 
         new Date(
-            getRandomNumber(1970, 2018), 
-            getRandomNumber(0,11),
-            getRandomNumber(1,28),
-            getRandomNumber(0,23),
-            getRandomNumber(0,59))));
+                getRandomNumber(1970, 2018), 
+                getRandomNumber(0,11),
+                getRandomNumber(1,28),
+                getRandomNumber(0,23),
+                getRandomNumber(0,59)
+            ),
+            getRandomEventType()
+            ));
   }
   private _initStore() {
     this.$store.dispatch('initList', [

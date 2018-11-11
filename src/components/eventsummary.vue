@@ -1,37 +1,53 @@
 <template>
   <div>
-    <v-card>
-        <v-img height="200px">
-            <div>{{name}}</div>
-            <div>{{date | formatDateTime}}</div>
-            <!-- <div>{{eventType}}</div>
-            <div>{{currentTime}}</div> -->
-            <div v-if="elapsedDuration">
-                <div><span>Y</span> <span>{{elapsedDuration.years}}</span></div>
-                <div><span>M</span> <span>{{elapsedDuration.months}}</span></div>
-                <div><span>W</span> <span>{{elapsedDuration.weeks}}</span></div>
-                <div><span>D</span> <span>{{elapsedDuration.days}}</span></div>
-                <div><span>hh</span> <span>{{elapsedDuration.hours}}</span></div>
-                <div><span>mm</span> <span>{{elapsedDuration.minutes}}</span></div>
-                <div><span>ss</span> <span>{{elapsedDuration.seconds}}</span></div>
+    <div class="cardsize">
+        <v-card>
+            <v-img>
+                <div v-if="elapsedDuration" class ="capsuleParent">
+                    <InfoCapsuleComponent :label="'Y'" :value="elapsedDuration.years" class="capsule capsule-year"/>
+                    <InfoCapsuleComponent :label="'D'" :value="elapsedDuration.days" class="capsule capsule-date"/>
+                    <InfoCapsuleComponent :label="'M'" :value="elapsedDuration.months" class="capsule capsule-month"/>
+                    <InfoCapsuleComponent :label="'hh'" :value="elapsedDuration.hours" class="capsule capsule-hour"/>
+                    <InfoCapsuleComponent :label="'W'" :value="elapsedDuration.weeks" class="capsule capsule-week"/>
+                    <InfoCapsuleComponent :label="'mm'" :value="elapsedDuration.minutes" class="capsule capsule-minute"/>
+                    <InfoCapsuleComponent :label="'ss'" :value="elapsedDuration.seconds" class="capsule capsule-second"/>
+                </div>
+            </v-img>
+
+            <div class ="bottom">
+                <div class ="">
+                        <span v-if="eventType === 'Birthday'">
+                            <v-icon style="color:red">cake</v-icon>
+                        </span>
+                        <span v-else-if="eventType === 'Anniversary'">
+                            <v-icon style="color:green">people</v-icon>
+                        </span>
+                        <span v-else></span>
+                        {{name}}
+                </div>
+                <div class =""><div>{{date | formatDateTime}}</div></div>
+                <div class ="">
+                    <v-btn icon  v-on:click.native='removeEvent()'>
+                        <v-icon>create</v-icon>
+                    </v-btn>
+                </div>
             </div>
-        </v-img>
-        <v-card-actions>
-            <v-spacer></v-spacer>
-            <v-btn icon  v-on:click.native='removeEvent()'>
-                <v-icon>create</v-icon>
-            </v-btn>
-        </v-card-actions>
-    </v-card>
-  </div>
+        </v-card>
+        </div>
+        </div>
+
+
 </template>
 
 <script lang='ts'>
 import { Component, Prop, Vue } from 'vue-property-decorator';
 import TimerUtil from '../utils/timerutil';
 import Duration from '../models/duration';
+import InfoCapsuleComponent from './infocapsule.vue'
 
-@Component
+@Component({
+  components: {InfoCapsuleComponent},
+})
 export default class EventSummaryComponent extends Vue {
     @Prop() private name: string;
     @Prop() private date: Date;
@@ -64,5 +80,47 @@ export default class EventSummaryComponent extends Vue {
 </script>
 
 <style lang='scss'>
+.cardsize{
+    padding: 3px;
+    background: rebeccapurple;
+}
+.capsuleParent{
+    display: flex;
+    flex-flow: row wrap;
+}
+.capsule{
+    flex: 1 0 calc(50%);
+    padding-left: 26px;
+    padding-right: 26px;
+    &-year{
+        // background:#cc493f;
+        padding-top:26px;
+        text-align:left;
+    }
+    &-date{
+        padding-top:26px;
+        text-align:right;
+    }
+    &-month{
+        text-align:left;
+    }
+    &-week{
+          text-align:left;
+    }
+    
+    &-hour{
+        text-align:right;
+    }
+    &-minute{
+        text-align:right;
+    }
+    &-second{
+        text-align:center;
+        padding-bottom:26px;
+    }
+}
+.bottom{
+    background: blueviolet;
+}
 </style>
 
