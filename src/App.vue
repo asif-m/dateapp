@@ -82,7 +82,21 @@ export default class App extends Vue {
         new EventDataNode(UniqueIDUtil.generate(), 'Asif - Shameeha', new Date(1994, MONTH.DEC, 29), EVENTTYPE.ANNIVERSARY),
         new EventDataNode(UniqueIDUtil.generate(), 'Ahmed', new Date(1945, MONTH.SEP, 10), EVENTTYPE.BIRTHDAY),
         new EventDataNode(UniqueIDUtil.generate(), 'Nafeesa', new Date(1958, MONTH.JUN, 21), EVENTTYPE.BIRTHDAY),
-         new EventDataNode(UniqueIDUtil.generate(), 'Ahmed - Nafeesa', new Date(1976, MONTH.MAY, 12), EVENTTYPE.ANNIVERSARY),
+        new EventDataNode(UniqueIDUtil.generate(), 'Ahmed - Nafeesa', new Date(1976, MONTH.MAY, 12), EVENTTYPE.ANNIVERSARY),
+
+        new EventDataNode(UniqueIDUtil.generate(), 'JAN', new Date(1976, MONTH.JAN, 12), EVENTTYPE.ANNIVERSARY),
+        new EventDataNode(UniqueIDUtil.generate(), 'FEB', new Date(1976, MONTH.FEB, 12), EVENTTYPE.ANNIVERSARY),
+        new EventDataNode(UniqueIDUtil.generate(), 'MAR', new Date(1976, MONTH.MAR, 12), EVENTTYPE.ANNIVERSARY),
+        new EventDataNode(UniqueIDUtil.generate(), 'APR', new Date(1976, MONTH.APR, 12), EVENTTYPE.ANNIVERSARY),
+        new EventDataNode(UniqueIDUtil.generate(), 'MAY', new Date(1976, MONTH.MAY, 12), EVENTTYPE.ANNIVERSARY),
+        new EventDataNode(UniqueIDUtil.generate(), 'JUN', new Date(1976, MONTH.JUN, 12), EVENTTYPE.ANNIVERSARY),
+        new EventDataNode(UniqueIDUtil.generate(), 'JUL', new Date(1976, MONTH.JUL, 12), EVENTTYPE.ANNIVERSARY),
+        new EventDataNode(UniqueIDUtil.generate(), 'AUG', new Date(1976, MONTH.AUG, 12), EVENTTYPE.ANNIVERSARY),
+        new EventDataNode(UniqueIDUtil.generate(), 'SEP', new Date(1976, MONTH.SEP, 12), EVENTTYPE.ANNIVERSARY),
+        new EventDataNode(UniqueIDUtil.generate(), 'OCT', new Date(1976, MONTH.OCT, 12), EVENTTYPE.ANNIVERSARY),
+        new EventDataNode(UniqueIDUtil.generate(), 'NOV', new Date(1976, MONTH.NOV, 12), EVENTTYPE.ANNIVERSARY),
+        new EventDataNode(UniqueIDUtil.generate(), 'DEC', new Date(1976, MONTH.DEC, 12), EVENTTYPE.ANNIVERSARY),
+
         ]);
     }
 }

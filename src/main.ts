@@ -12,6 +12,9 @@ Vue.config.productionTip = false;
 Vue.filter('formatDate', DateFormatFilter.formatDate);
 Vue.filter('formatDateTime', DateFormatFilter.formatDateTime);
 Vue.filter('formatDateTime12Hrs', DateFormatFilter.formatDateTime12Hrs);
+Vue.filter('formatDateInHijri', DateFormatFilter.formatDateInHijri);
+
+
 
 new Vue({
   router,

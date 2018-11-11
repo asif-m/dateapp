@@ -4,18 +4,18 @@
         <v-card>
             <v-img>
                 <div v-if="elapsedDuration" class ="capsuleParent">
-                    <InfoCapsuleComponent :label="'Y'" :value="elapsedDuration.years" class="capsule capsule-year"/>
-                    <InfoCapsuleComponent :label="'D'" :value="elapsedDuration.days" class="capsule capsule-date"/>
-                    <InfoCapsuleComponent :label="'M'" :value="elapsedDuration.months" class="capsule capsule-month"/>
-                    <InfoCapsuleComponent :label="'hh'" :value="elapsedDuration.hours" class="capsule capsule-hour"/>
-                    <InfoCapsuleComponent :label="'W'" :value="elapsedDuration.weeks" class="capsule capsule-week"/>
-                    <InfoCapsuleComponent :label="'mm'" :value="elapsedDuration.minutes" class="capsule capsule-minute"/>
-                    <InfoCapsuleComponent :label="'ss'" :value="elapsedDuration.seconds" class="capsule capsule-second"/>
+                    <InfoCapsuleComponent :label="'Y'" :value="elapsedDuration.years" :labelFirst="true" class="capsule capsule-year"/>
+                    <InfoCapsuleComponent :label="'D'" :value="elapsedDuration.days" :labelFirst="false" class="capsule capsule-date"/>
+                    <InfoCapsuleComponent :label="'M'" :value="elapsedDuration.months" :labelFirst="true" class="capsule capsule-month"/>
+                    <InfoCapsuleComponent :label="'hh'" :value="elapsedDuration.hours" :labelFirst="false"  class="capsule capsule-hour"/>
+                    <InfoCapsuleComponent :label="'W'" :value="elapsedDuration.weeks" :labelFirst="true" class="capsule capsule-week"/>
+                    <InfoCapsuleComponent :label="'mm'" :value="elapsedDuration.minutes" :labelFirst="false" class="capsule capsule-minute"/>
+                    <InfoCapsuleComponent :label="'ss'" :value="elapsedDuration.seconds" :labelFirst="true" class="capsule capsule-second"/>
                 </div>
             </v-img>
 
-            <div class ="bottom">
-                <div class ="">
+            <div class ="footer">
+                <div class ="footerContents footerContents-left">
                         <span v-if="eventType === 'Birthday'">
                             <v-icon style="color:red">cake</v-icon>
                         </span>
@@ -25,18 +25,19 @@
                         <span v-else></span>
                         {{name}}
                 </div>
-                <div class =""><div>{{date | formatDateTime}}</div></div>
-                <div class ="">
+                <div class ="footerContents footerContents-center">
+                    <div>{{date | formatDateTime}}</div>
+                    <div class="hijriDate">{{date | formatDateInHijri}}</div>
+                </div>
+                <div class ="footerContents footerContents-right">
                     <v-btn icon  v-on:click.native='removeEvent()'>
                         <v-icon>create</v-icon>
                     </v-btn>
                 </div>
             </div>
         </v-card>
-        </div>
-        </div>
-
-
+    </div>
+</div>
 </template>
 
 <script lang='ts'>
@@ -80,6 +81,7 @@ export default class EventSummaryComponent extends Vue {
 </script>
 
 <style lang='scss'>
+$padding-capsule: 10px;
 .cardsize{
     padding: 3px;
     background: rebeccapurple;
@@ -90,15 +92,15 @@ export default class EventSummaryComponent extends Vue {
 }
 .capsule{
     flex: 1 0 calc(50%);
-    padding-left: 26px;
-    padding-right: 26px;
+    padding-left: $padding-capsule;
+    padding-right: $padding-capsule;
     &-year{
         // background:#cc493f;
-        padding-top:26px;
+        padding-top:$padding-capsule;
         text-align:left;
     }
     &-date{
-        padding-top:26px;
+        padding-top:$padding-capsule;
         text-align:right;
     }
     &-month{
@@ -116,11 +118,33 @@ export default class EventSummaryComponent extends Vue {
     }
     &-second{
         text-align:center;
-        padding-bottom:26px;
+        padding-bottom:$padding-capsule;
     }
 }
-.bottom{
-    background: blueviolet;
+.footer{
+    background: rebeccapurple;
+    display: flex;
+    flex-flow: row wrap;
+}
+.footerContents{
+    align-self: center;
+    &-left{
+        flex: 1 0 calc(33.333%);
+        padding-left: $padding-capsule;
+        text-align: left;
+    }
+    &-center{
+        flex: 1 0 calc(33.333%);
+        text-align: center;
+    }
+    &-right{
+        flex: 1 0 calc(33.333%);
+         padding-right: $padding-capsule;
+        text-align: right;
+    }
+}
+.hijriDate{
+    font-size: 10px;
 }
 </style>
 
