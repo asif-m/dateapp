@@ -53,14 +53,26 @@ export default class App extends Vue {
       this.$router.push({path});
   }
   public addEvent() {
+      const getRandomNumber = (min: number, max: number)=> {
+          return Math.floor(Math.random()*(max-min+1)+min);
+      }
       this.$store.dispatch('addEvent',
-        new EventDataNode(UniqueIDUtil.generate(), 'Asif', new Date(1983, MONTH.DEC, 25)));
+        new EventDataNode(UniqueIDUtil.generate(), 'Random', 
+        new Date(
+            getRandomNumber(1970, 2018), 
+            getRandomNumber(0,11),
+            getRandomNumber(1,28),
+            getRandomNumber(0,23),
+            getRandomNumber(0,59))));
   }
   private _initStore() {
     this.$store.dispatch('initList', [
-        new EventDataNode(UniqueIDUtil.generate(), 'Asif', new Date(1983, MONTH.DEC, 25), EVENTTYPE.BIRTHDAY),
+        new EventDataNode(UniqueIDUtil.generate(), 'Asif', new Date(1983, MONTH.DEC, 25, 12, 25), EVENTTYPE.BIRTHDAY),
         new EventDataNode(UniqueIDUtil.generate(), 'Shameeha', new Date(1994, MONTH.DEC, 29), EVENTTYPE.BIRTHDAY),
         new EventDataNode(UniqueIDUtil.generate(), 'Asif - Shameeha', new Date(1994, MONTH.DEC, 29), EVENTTYPE.ANNIVERSARY),
+        new EventDataNode(UniqueIDUtil.generate(), 'Ahmed', new Date(1945, MONTH.SEP, 10), EVENTTYPE.BIRTHDAY),
+        new EventDataNode(UniqueIDUtil.generate(), 'Nafeesa', new Date(1958, MONTH.JUN, 21), EVENTTYPE.BIRTHDAY),
+         new EventDataNode(UniqueIDUtil.generate(), 'Ahmed - Nafeesa', new Date(1976, MONTH.MAY, 12), EVENTTYPE.ANNIVERSARY),
         ]);
     }
 }
