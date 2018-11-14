@@ -79,7 +79,7 @@ export default class App extends Vue {
     this.$store.dispatch('initList', [
         new EventDataNode(UniqueIDUtil.generate(), 'Asif', new Date(1983, MONTH.DEC, 25, 12, 25), EVENTTYPE.BIRTHDAY),
         new EventDataNode(UniqueIDUtil.generate(), 'Shameeha', new Date(1994, MONTH.DEC, 29), EVENTTYPE.BIRTHDAY),
-        new EventDataNode(UniqueIDUtil.generate(), 'Asif - Shameeha', new Date(1994, MONTH.DEC, 29), EVENTTYPE.ANNIVERSARY),
+        new EventDataNode(UniqueIDUtil.generate(), 'Asif - Shameeha', new Date(1994, MONTH.DEC, 29, 11,15), EVENTTYPE.ANNIVERSARY),
         new EventDataNode(UniqueIDUtil.generate(), 'Ahmed', new Date(1945, MONTH.SEP, 10), EVENTTYPE.BIRTHDAY),
         new EventDataNode(UniqueIDUtil.generate(), 'Nafeesa', new Date(1958, MONTH.JUN, 21), EVENTTYPE.BIRTHDAY),
         new EventDataNode(UniqueIDUtil.generate(), 'Ahmed - Nafeesa', new Date(1976, MONTH.MAY, 12), EVENTTYPE.ANNIVERSARY),
