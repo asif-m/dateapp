@@ -7,6 +7,7 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     events: [],
+    reminders : [],
   },
   mutations: {
     initList(state, events: []) {
@@ -32,6 +33,9 @@ export default new Vuex.Store({
         state.events.splice(index, 1);
       }
     },
+    initReminders(state, reminders: []) {
+      state.reminders = reminders;
+    },
   },
   actions: {
     initList({ commit }, events) {
@@ -46,8 +50,12 @@ export default new Vuex.Store({
     editEvent({ commit }, event) {
       commit('editEvent', event);
     },
+    initReminders({ commit }, reminders) {
+      commit('initReminders', reminders);
+    },
   },
   getters: {
     events: (state) => state.events,
+    reminders : (state) => state.reminders,
   },
 });

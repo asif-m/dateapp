@@ -33,12 +33,8 @@
 
 <script lang='ts'>
 import { Component, Prop, Vue } from 'vue-property-decorator';
-import EventDataNode from './models/eventdatanode';
 import TimerUtil from './utils/timerutil';
-import UniqueIDUtil from './utils/uniqueidutil';
-import MONTH from './constants/month';
-import EVENTTYPE from './constants/eventtype';
-
+import StoreHelper from './utils/storehelper';
 
 @Component
 export default class App extends Vue {
@@ -53,52 +49,11 @@ export default class App extends Vue {
       this.$router.push({path});
   }
   public addEvent() {
-      const getRandomNumber = (min: number, max: number)=> {
-          return Math.floor(Math.random()*(max-min+1)+min);
-      }
-      const getRandomEventType = () => {
-          switch(getRandomNumber(0,2)){
-              case 0: return EVENTTYPE.NONE;
-              case 1: return EVENTTYPE.BIRTHDAY;
-              case 2: return EVENTTYPE.ANNIVERSARY;
-          }
-      } 
-      this.$store.dispatch('addEvent',
-        new EventDataNode(UniqueIDUtil.generate(), 'Random', 
-        new Date(
-                getRandomNumber(1970, 2018), 
-                getRandomNumber(0,11),
-                getRandomNumber(1,28),
-                getRandomNumber(0,23),
-                getRandomNumber(0,59)
-            ),
-            getRandomEventType()
-            ));
+     StoreHelper.addRandomEvent(this.$store);
   }
   private _initStore() {
-    this.$store.dispatch('initList', [
-        new EventDataNode(UniqueIDUtil.generate(), 'Asif', new Date(1983, MONTH.DEC, 25, 12, 25), EVENTTYPE.BIRTHDAY),
-        new EventDataNode(UniqueIDUtil.generate(), 'Shameeha', new Date(1994, MONTH.DEC, 29), EVENTTYPE.BIRTHDAY),
-        new EventDataNode(UniqueIDUtil.generate(), 'Asif - Shameeha', new Date(1994, MONTH.DEC, 29, 11,15), EVENTTYPE.ANNIVERSARY),
-        new EventDataNode(UniqueIDUtil.generate(), 'Ahmed', new Date(1945, MONTH.SEP, 10), EVENTTYPE.BIRTHDAY),
-        new EventDataNode(UniqueIDUtil.generate(), 'Nafeesa', new Date(1958, MONTH.JUN, 21), EVENTTYPE.BIRTHDAY),
-        new EventDataNode(UniqueIDUtil.generate(), 'Ahmed - Nafeesa', new Date(1976, MONTH.MAY, 12), EVENTTYPE.ANNIVERSARY),
-
-        new EventDataNode(UniqueIDUtil.generate(), 'JAN', new Date(1976, MONTH.JAN, 12), EVENTTYPE.ANNIVERSARY),
-        new EventDataNode(UniqueIDUtil.generate(), 'FEB', new Date(1976, MONTH.FEB, 12), EVENTTYPE.ANNIVERSARY),
-        new EventDataNode(UniqueIDUtil.generate(), 'MAR', new Date(1976, MONTH.MAR, 12), EVENTTYPE.ANNIVERSARY),
-        new EventDataNode(UniqueIDUtil.generate(), 'APR', new Date(1976, MONTH.APR, 12), EVENTTYPE.ANNIVERSARY),
-        new EventDataNode(UniqueIDUtil.generate(), 'MAY', new Date(1976, MONTH.MAY, 12), EVENTTYPE.ANNIVERSARY),
-        new EventDataNode(UniqueIDUtil.generate(), 'JUN', new Date(1976, MONTH.JUN, 12), EVENTTYPE.ANNIVERSARY),
-        new EventDataNode(UniqueIDUtil.generate(), 'JUL', new Date(1976, MONTH.JUL, 12), EVENTTYPE.ANNIVERSARY),
-        new EventDataNode(UniqueIDUtil.generate(), 'AUG', new Date(1976, MONTH.AUG, 12), EVENTTYPE.ANNIVERSARY),
-        new EventDataNode(UniqueIDUtil.generate(), 'SEP', new Date(1976, MONTH.SEP, 12), EVENTTYPE.ANNIVERSARY),
-        new EventDataNode(UniqueIDUtil.generate(), 'OCT', new Date(1976, MONTH.OCT, 12), EVENTTYPE.ANNIVERSARY),
-        new EventDataNode(UniqueIDUtil.generate(), 'NOV', new Date(1976, MONTH.NOV, 12), EVENTTYPE.ANNIVERSARY),
-        new EventDataNode(UniqueIDUtil.generate(), 'DEC', new Date(1976, MONTH.DEC, 12), EVENTTYPE.ANNIVERSARY),
-
-        ]);
-    }
+      StoreHelper.initialize(this.$store);
+  }
 }
 </script>
 

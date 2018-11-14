@@ -53,7 +53,7 @@
 import { Component, Prop, Vue } from 'vue-property-decorator';
 import TimerUtil from '../utils/timerutil';
 import Duration from '../models/duration';
-import InfoCapsuleComponent from './infocapsule.vue'
+import InfoCapsuleComponent from './infocapsule.vue';
 
 @Component({
   components: {InfoCapsuleComponent},
@@ -70,15 +70,11 @@ export default class EventSummaryComponent extends Vue {
         this.elapsedDuration = new Duration();
         this.currentTime = new Date();
         this.elapsedDuration.updateDates(this.currentTime, this.date);
-        this.updateCurrentTime(new Date());
         TimerUtil.subscribe({method: this.onTimer, scope: this});
     }
     private onTimer(date: Date) {
        this.currentTime = date;
-        this.elapsedDuration.updateDates(this.currentTime, this.date);
-    }
-    private updateCurrentTime(date: Date) {
-        
+       this.elapsedDuration.updateDates(this.currentTime, this.date);
     }
     private beforeDestroy() {
         TimerUtil.unsubscribe({method: this.onTimer, scope: this});
