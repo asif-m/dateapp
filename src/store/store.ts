@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
-import EventDataNode from './models/eventdatanode';
+import EventDataNode from '../models/eventdatanode';
 
 Vue.use(Vuex);
 

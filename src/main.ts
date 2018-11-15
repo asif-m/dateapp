@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import App from './App.vue';
-import router from './router';
-import store from './store';
+import router from './router/router';
+import store from './store/store';
 import Vuetify from 'vuetify';
 import 'vuetify/dist/vuetify.min.css'; // Ensure you are using css-loader
 import DateFormatFilter from './filters/datetimeformatfilter';
@@ -13,8 +13,6 @@ Vue.filter('formatDate', DateFormatFilter.formatDate);
 Vue.filter('formatDateTime', DateFormatFilter.formatDateTime);
 Vue.filter('formatDateTime12Hrs', DateFormatFilter.formatDateTime12Hrs);
 Vue.filter('formatDateInHijri', DateFormatFilter.formatDateInHijri);
-
-
 
 new Vue({
   router,
