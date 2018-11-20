@@ -1,3 +1,5 @@
+import ApproxDateUtil from '../utils/approxdateutil';
+
 export interface IReminderDataNode {
     years?: number;
     months?: number;
@@ -16,17 +18,20 @@ export class ReminderDataNode {
   public hours = 0;
   public minutes = 0;
   public seconds = 0;
+  public readonly approximateDays: number;
   constructor(
    data: IReminderDataNode,
   ) {
-      if (data) {
-        this.years = data.years || 0;
-        this.months = data.months || 0;
-        this.weeks = data.weeks || 0;
-        this.days = data.days || 0;
-        this.hours = data.hours || 0;
-        this.minutes = data.minutes || 0;
-        this.seconds = data.seconds || 0;
-      }
+    if (data) {
+      this.years = data.years || 0;
+      this.months = data.months || 0;
+      this.weeks = data.weeks || 0;
+      this.days = data.days || 0;
+      this.hours = data.hours || 0;
+      this.minutes = data.minutes || 0;
+      this.seconds = data.seconds || 0;
+      this.approximateDays = ApproxDateUtil.getApproximateDays(
+        this.years, this.months, this.weeks, this.days , this.hours, this.minutes, this.seconds);
+    }
   }
 }

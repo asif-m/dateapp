@@ -22,11 +22,30 @@
 
 <script lang='ts'>
 import { Component, Prop, Vue } from 'vue-property-decorator';
+import ReminderUtil from './../utils/reminderutil';
+import EventDataNode from './../models/eventdatanode';
+import {ReminderDataNode} from './../models/reminderdatanode';
 
 @Component
-export default class Timeline extends Vue {}
+export default class Timeline extends Vue {
+    private sortedEvents: EventDataNode[];
+    private sortedReminders: ReminderDataNode[];
+    constructor() {
+        super();
+        this.sortedEvents = this.$store.getters.events
+            .map((eventDataNode: EventDataNode) => eventDataNode);
+        this.sortedEvents.sort((a: EventDataNode, b: EventDataNode) =>
+                a.approximateDaysSince1900 === b.approximateDaysSince1900 ? 0 :
+                (a.approximateDaysSince1900 > b.approximateDaysSince1900 ? -1 : 1));
+        this.sortedReminders = this.$store.getters.reminders
+            .map((reminderDataNode: ReminderDataNode) => reminderDataNode);
+        this.sortedReminders.sort((a: ReminderDataNode, b: ReminderDataNode) =>
+                a.approximateDays === b.approximateDays ? 0 :
+                (a.approximateDays > b.approximateDays ? -1 : 1));
+        ReminderUtil.getRemindersArray(this.sortedEvents , this.sortedReminders, new Date(), 20);
+    }
+}
 </script>
 
 <style lang='scss'>
 </style>
-

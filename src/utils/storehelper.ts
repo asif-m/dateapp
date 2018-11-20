@@ -28,6 +28,8 @@ export default class StoreHelper {
     }
     private static initEvents(store: any) {
         store.dispatch('initList', [
+            new EventDataNode(UniqueIDUtil.generate(), 'Today',
+                new Date()),
             new EventDataNode(UniqueIDUtil.generate(), 'Asif',
                 new Date(1983, MONTH.DEC, 25, 12, 25), EVENTTYPE.BIRTHDAY),
             new EventDataNode(UniqueIDUtil.generate(), 'Shameeha',
