@@ -3,14 +3,13 @@
         <v-layout row>
             <v-flex>
                 <v-card>
-                    <v-container fluid grid-list-sm>
+                    <v-container fluid grid-list-xl>
                         <v-layout row wrap>
-                          Timeline
-                            <!-- <v-flex v-for="event in events" :key="event.id" xs4>
-                                <div>
-                                   Timeline
-                                </div>
-                            </v-flex> -->
+                            <v-flex v-for="timelinenodeData in this.$store.getters.timelineData" xs12>
+                                <div >
+                                    <TimelinePacketComponent :timelinesData=timelinenodeData></TimelinePacketComponent>
+                                </div>           
+                            </v-flex>
                         </v-layout>
                     </v-container>
                 </v-card>
@@ -25,8 +24,11 @@ import { Component, Prop, Vue } from 'vue-property-decorator';
 import ReminderUtil from './../utils/reminderutil';
 import EventDataNode from './../models/eventdatanode';
 import {ReminderDataNode} from './../models/reminderdatanode';
+import TimelinePacketComponent from './../components/timelinepacket.vue';
 
-@Component
+@Component({
+  components: {TimelinePacketComponent},
+})
 export default class Timeline extends Vue {
     private sortedEvents: EventDataNode[];
     private sortedReminders: ReminderDataNode[];
@@ -40,9 +42,10 @@ export default class Timeline extends Vue {
         this.sortedReminders = this.$store.getters.reminders
             .map((reminderDataNode: ReminderDataNode) => reminderDataNode);
         this.sortedReminders.sort((a: ReminderDataNode, b: ReminderDataNode) =>
-                a.approximateDays === b.approximateDays ? 0 :
-                (a.approximateDays > b.approximateDays ? -1 : 1));
-        ReminderUtil.getRemindersArray(this.sortedEvents , this.sortedReminders, new Date(), true, 20);
+            a.approximateDays === b.approximateDays ? 0 :
+            (a.approximateDays > b.approximateDays ? -1 : 1));
+        this.$store.dispatch('addTimelineData',
+            ReminderUtil.getRemindersArray(this.sortedEvents , this.sortedReminders, new Date(), true, 20));
     }
 }
 </script>

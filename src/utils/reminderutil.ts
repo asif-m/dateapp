@@ -1,6 +1,7 @@
 import EventDataNode from './../models/eventdatanode';
 import {ReminderDataNode} from './../models/reminderdatanode';
 import DateUtil from './dateutil';
+import TimelineDataNode from '../models/timelinedatanode';
 
 export default class ReminderUtil {
   public static getRemindersArray(
@@ -13,10 +14,14 @@ export default class ReminderUtil {
       const result: any = [];
       events.forEach((event: EventDataNode) => {
         if (daysSince1900 >= event.daysSince1900) {
-          const closeRem = ReminderUtil.getKClosest(reminders, event.daysSince1900, nRemindersWidth);
-          result.push({event, reminders: closeRem});
+          ReminderUtil.getKClosest(reminders, event.daysSince1900, nRemindersWidth)
+            .forEach((reminder) => result.push(new TimelineDataNode(event, reminder)));
         }
       });
+      result.sort((a: TimelineDataNode, b: TimelineDataNode) =>
+        a.occuranceDaysSince1900 === b.occuranceDaysSince1900 ? 0 :
+          (a.occuranceDaysSince1900 > b.occuranceDaysSince1900 ? 1 : -1),
+      );
       return result;
   }
   private static findCrossOver(arr: ReminderDataNode[], low: number, high: number, x: number): number {

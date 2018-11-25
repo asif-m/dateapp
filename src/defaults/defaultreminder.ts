@@ -23,6 +23,7 @@ export default  {
     new ReminderDataNode({seconds: 1}),
  ],
  combinatory : [
+      new ReminderDataNode({years : 0, months: 0, weeks : 0, days : 0, hours : 0, minutes : 0, seconds : 0}),
     new ReminderDataNode({years : 1, months: 1, weeks : 1, days : 1, hours : 1, minutes : 1, seconds : 1}),
  ],
 };

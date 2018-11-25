@@ -75,19 +75,79 @@ export default class DateUtil {
     }
     public static addReminderToDate(orgDate: Date, reminder: ReminderDataNode): Date {
         const date = new Date(orgDate);
-        date.setFullYear(date.getFullYear() + reminder.years,
-            date.getMonth() + reminder.months,
-            date.getDate() + reminder.days + 7 * reminder.weeks);
-        date.setHours(date.getHours() + reminder.hours);
-        date.setMinutes(date.getMinutes() + reminder.minutes);
-        date.setSeconds(date.getSeconds() + reminder.seconds);
+        if (reminder.years) {
+          date.setFullYear(orgDate.getFullYear() + reminder.years);
+        }
+        if (reminder.months) {
+          date.setMonth(orgDate.getMonth() + reminder.months);
+        }
+        if (reminder.days + 7 * reminder.weeks) {
+          date.setDate(orgDate.getDate() + reminder.days + 7 * reminder.weeks);
+        }
+        if (reminder.hours) {
+          date.setHours(date.getHours() + reminder.hours);
+        }
+        if (reminder.minutes) {
+          date.setMinutes(date.getMinutes() + reminder.minutes);
+        }
+        if (reminder.seconds) {
+          date.setSeconds(date.getSeconds() + reminder.seconds);
+        }
         return date;
     }
     public static getHijriDateTime(date: Date, adjustments = 0) {
         const hijriDate = DateUtil.calculateHijriDate(date, adjustments);
         return  hijriDate.day + ' ' + DateUtil.getHijriMonthName(hijriDate.month) + ' ' + hijriDate.year;
     }
-
+    public static formatDate(date: Date) {
+      return DateUtil.getZeroAppendedString(date.getDate()) + ' ' +
+        DateUtil.getMonthString(date.getMonth()) + ' ' +
+        date.getFullYear();
+    }
+    public static formatDateTime(date: Date) {
+      const timeStr = DateUtil.getTimeString(date);
+      return DateUtil.getZeroAppendedString(date.getDate()) + ' ' +
+        DateUtil.getMonthString(date.getMonth()) + ' ' +
+        date.getFullYear() +
+        (timeStr ? ' @ ' + timeStr : '');
+    }
+    public static formatDateTimeWithWeek(date: Date) {
+      const timeStr = DateUtil.getTimeString(date);
+      return DateUtil.getWeekDayName(date) + ', ' +
+        DateUtil.getZeroAppendedString(date.getDate()) + ' ' +
+        DateUtil.getMonthString(date.getMonth()) + ' ' +
+        date.getFullYear() +
+        (timeStr ? ' @ ' + timeStr : '');
+    }
+    public static formatDateTime12Hrs(date: Date) {
+      const timeStr = DateUtil.getTimeString12Hrs(date);
+      return DateUtil.getZeroAppendedString(date.getDate()) + ' ' +
+        DateUtil.getMonthString(date.getMonth()) + ' ' +
+        date.getFullYear() +
+        (timeStr ? ' @ ' + timeStr : '');
+    }
+    private static getTimeString(date: Date) {
+      const hours = date.getHours();
+      const mins = date.getMinutes();
+      if (hours === 0 && mins === 0) {
+        return '';
+      }
+      return DateUtil.getZeroAppendedString(hours) + ':' +
+      DateUtil.getZeroAppendedString(mins);
+    }
+    private static getTimeString12Hrs(date: Date) {
+      const hours = date.getHours();
+      const mins = date.getMinutes();
+      if (hours === 0 && mins === 0) {
+        return '';
+      }
+      return  DateUtil.getZeroAppendedString((hours > 12 ? (hours - 12) : hours)) + ':' +
+        DateUtil.getZeroAppendedString(mins) + ' ' +
+        (hours >= 12 ? 'PM' : 'AM');
+    }
+    private static getZeroAppendedString(n: number) {
+      return n < 10 ? '0' + n : n;
+    }
     private static calculateHijriDate(date: Date, adjustDays: number) {
         const gmod = (n: number, mod: number) => ((n % mod) + mod ) % mod;
         if (adjustDays) {
@@ -166,5 +226,5 @@ export default class DateUtil {
           CEMonth : month - 1,
           CEYear : year,
         };
-      }
+    }
   }

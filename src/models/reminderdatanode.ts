@@ -19,6 +19,7 @@ export class ReminderDataNode {
   public minutes = 0;
   public seconds = 0;
   public readonly approximateDays: number;
+  public id = '';
   constructor(
    data: IReminderDataNode,
   ) {
@@ -32,6 +33,18 @@ export class ReminderDataNode {
       this.seconds = data.seconds || 0;
       this.approximateDays = DateUtil.getApproximateDays(
         this.years, this.months, this.weeks, this.days , this.hours, this.minutes, this.seconds);
+      const id = ((this.years ? ' ' + this.years + ' Y,' : '') +
+        (this.months ? ' ' + this.months + ' M,' : '') +
+        (this.weeks ? ' ' + this.weeks + ' W,' : '') +
+        (this.days ? ' ' + this.days + ' D,' : '') +
+        (this.hours ? ' ' + this.hours + ' hh,' : '') +
+        (this.minutes ? ' ' + this.minutes + ' mm,' : '') +
+        (this.seconds ? ' ' + this.seconds + ' ss,' : ''))
+        .replace(/,\s*$/, '');
+      this.id = id ? id : 'This day';
     }
+  }
+  public toString() {
+    return this.id;
   }
 }
