@@ -22,25 +22,23 @@
                             </v-btn>
                         </div>
                         <div class="cardIcon">
-                             <span  v-if="eventType === 'Birthday'">
+                             <span  v-if="eventData.eventType === 'Birthday'">
                                 <v-icon style="color:red">cake</v-icon>
                             </span>
-                            <span  v-else-if="eventType === 'Anniversary'">
+                            <span  v-else-if="eventData.eventType === 'Anniversary'">
                                 <v-icon style="color:green">people</v-icon>
                             </span>
                             <span  v-else></span>
                         </div>
                          <div class="cardHijriDate">
-                            <span class="cardHijriDateContent">{{date | formatDateInHijri}}</span>
+                            <span class="cardHijriDateContent">{{eventData.hijriDate}}</span>
                         </div>
 
                         <div class="cardDate">
-                            {{date | formatDateTime}}</div>
+                            {{eventData.date | formatDateTimeWithWeek}}</div>
                         <div class="cardName">
-                            {{name}}
+                            {{eventData.name}}
                         </div>
-                        
-                        
                     </div>
                 </div>
             </v-img>
@@ -54,33 +52,31 @@ import { Component, Prop, Vue } from 'vue-property-decorator';
 import TimerUtil from '../utils/timerutil';
 import Duration from '../models/duration';
 import InfoCapsuleComponent from './infocapsule.vue';
+import EventDataNode from '../models/eventdatanode';
 
 @Component({
   components: {InfoCapsuleComponent},
 })
 export default class EventSummaryComponent extends Vue {
-    @Prop() private name: string;
-    @Prop() private date: Date;
-    @Prop() private id: string;
-    @Prop() private eventType: string;
+    @Prop() private eventData: EventDataNode;
     private currentTime: Date;
     private elapsedDuration: Duration;
     constructor() {
         super();
         this.elapsedDuration = new Duration();
         this.currentTime = new Date();
-        this.elapsedDuration.updateDates(this.currentTime, this.date);
+        this.elapsedDuration.updateDates(this.currentTime, this.eventData.date);
         TimerUtil.subscribe({method: this.onTimer, scope: this});
     }
     private onTimer(date: Date) {
        this.currentTime = date;
-       this.elapsedDuration.updateDates(this.currentTime, this.date);
+       this.elapsedDuration.updateDates(this.currentTime, this.eventData.date);
     }
     private beforeDestroy() {
         TimerUtil.unsubscribe({method: this.onTimer, scope: this});
     }
     private removeEvent() {
-        this.$store.dispatch('removeEvent', this.id);
+        this.$store.dispatch('removeEvent', this.eventData.id);
     }
 }
 </script>

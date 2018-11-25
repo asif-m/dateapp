@@ -6,6 +6,7 @@ export default class EventDataNode {
   public eventType: string;
   public date: Date;
   public readonly daysSince1900: number;
+  public readonly hijriDate: string;
   constructor(
     id: string,
     name: string,
@@ -15,6 +16,7 @@ export default class EventDataNode {
     this.id = id;
     this.name = name;
     this.date = date;
+    this.hijriDate = DateUtil.getHijriDateTime(date, 0);
     this.daysSince1900 = DateUtil.getApproximateDays(
       date.getFullYear() - 1900,
       date.getMonth() + 1,
