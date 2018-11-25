@@ -1,11 +1,11 @@
 import EVENTTYPE from '@/constants/eventtype';
-import ApproxDateUtil from '../utils/approxdateutil';
+import DateUtil from '../utils/dateutil';
 export default class EventDataNode {
   public id: string;
   public name: string;
   public eventType: string;
   public date: Date;
-  public readonly approximateDaysSince1900: number;
+  public readonly daysSince1900: number;
   constructor(
     id: string,
     name: string,
@@ -15,7 +15,7 @@ export default class EventDataNode {
     this.id = id;
     this.name = name;
     this.date = date;
-    this.approximateDaysSince1900 = ApproxDateUtil.getApproximateDays(
+    this.daysSince1900 = DateUtil.getApproximateDays(
       date.getFullYear() - 1900,
       date.getMonth() + 1,
       0,

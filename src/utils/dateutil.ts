@@ -1,4 +1,6 @@
-export default class ApproxDateUtil {
+import {ReminderDataNode} from '../models/reminderdatanode';
+
+export default class DateUtil {
     public static getApproximateDays(
         years = 0,
         months = 0,
@@ -24,5 +26,15 @@ export default class ApproxDateUtil {
             months * daysInMonth +
             years * daysInYear,
           );
+    }
+    public static addReminderToDate(orgDate: Date, reminder: ReminderDataNode): Date {
+        const date = new Date(orgDate);
+        date.setFullYear(date.getFullYear() + reminder.years,
+            date.getMonth() + reminder.months,
+            date.getDate() + reminder.days + 7 * reminder.weeks);
+        date.setHours(date.getHours() + reminder.hours);
+        date.setMinutes(date.getMinutes() + reminder.minutes);
+        date.setSeconds(date.getSeconds() + reminder.seconds);
+        return date;
     }
   }

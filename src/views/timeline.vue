@@ -35,14 +35,14 @@ export default class Timeline extends Vue {
         this.sortedEvents = this.$store.getters.events
             .map((eventDataNode: EventDataNode) => eventDataNode);
         this.sortedEvents.sort((a: EventDataNode, b: EventDataNode) =>
-                a.approximateDaysSince1900 === b.approximateDaysSince1900 ? 0 :
-                (a.approximateDaysSince1900 > b.approximateDaysSince1900 ? -1 : 1));
+                a.daysSince1900 === b.daysSince1900 ? 0 :
+                (a.daysSince1900 > b.daysSince1900 ? -1 : 1));
         this.sortedReminders = this.$store.getters.reminders
             .map((reminderDataNode: ReminderDataNode) => reminderDataNode);
         this.sortedReminders.sort((a: ReminderDataNode, b: ReminderDataNode) =>
                 a.approximateDays === b.approximateDays ? 0 :
                 (a.approximateDays > b.approximateDays ? -1 : 1));
-        ReminderUtil.getRemindersArray(this.sortedEvents , this.sortedReminders, new Date(), 20);
+        ReminderUtil.getRemindersArray(this.sortedEvents , this.sortedReminders, new Date(), true, 20);
     }
 }
 </script>

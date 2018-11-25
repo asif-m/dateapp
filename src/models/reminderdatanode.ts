@@ -1,4 +1,4 @@
-import ApproxDateUtil from '../utils/approxdateutil';
+import DateUtil from '../utils/dateutil';
 
 export interface IReminderDataNode {
     years?: number;
@@ -30,7 +30,7 @@ export class ReminderDataNode {
       this.hours = data.hours || 0;
       this.minutes = data.minutes || 0;
       this.seconds = data.seconds || 0;
-      this.approximateDays = ApproxDateUtil.getApproximateDays(
+      this.approximateDays = DateUtil.getApproximateDays(
         this.years, this.months, this.weeks, this.days , this.hours, this.minutes, this.seconds);
     }
   }
