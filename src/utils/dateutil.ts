@@ -104,6 +104,12 @@ export default class DateUtil {
         DateUtil.getMonthString(date.getMonth()) + ' ' +
         date.getFullYear();
     }
+    public static formatDateWithWeek(date: Date) {
+      return  DateUtil.getWeekDayName(date) + ', ' +
+        DateUtil.getZeroAppendedString(date.getDate()) + ' ' +
+        DateUtil.getMonthString(date.getMonth()) + ' ' +
+        date.getFullYear();
+    }
     public static formatDateTime(date: Date) {
       const timeStr = DateUtil.getTimeString(date);
       return DateUtil.getZeroAppendedString(date.getDate()) + ' ' +

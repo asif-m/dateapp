@@ -15,7 +15,7 @@ export default class TimelineDataNode {
     this.eventData = eventData;
     this.reminderData = reminderData;
     this.occuranceDate = DateUtil.addReminderToDate(eventData.date, reminderData);
-    this.occuranceDateString = DateUtil.formatDate(this.occuranceDate);
+    this.occuranceDateString = DateUtil.formatDateWithWeek(this.occuranceDate);
     this.occuranceDaysSince1900 = DateUtil.getApproximateDays(
       this.occuranceDate.getFullYear() - 1900,
       this.occuranceDate.getMonth() + 1,

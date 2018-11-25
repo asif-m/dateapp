@@ -14,8 +14,9 @@ export default class ReminderUtil {
       const result: any = [];
       events.forEach((event: EventDataNode) => {
         if (daysSince1900 >= event.daysSince1900) {
-          ReminderUtil.getKClosest(reminders, event.daysSince1900, nRemindersWidth)
-            .forEach((reminder) => result.push(new TimelineDataNode(event, reminder)));
+          // ReminderUtil.getKClosest(reminders, event.daysSince1900, nRemindersWidth)
+          //   .forEach((reminder) => result.push(new TimelineDataNode(event, reminder)));
+            reminders.forEach((reminder) => result.push(new TimelineDataNode(event, reminder)));
         }
       });
       result.sort((a: TimelineDataNode, b: TimelineDataNode) =>

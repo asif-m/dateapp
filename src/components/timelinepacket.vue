@@ -3,7 +3,7 @@
         <div class="timelineLeft"> {{timelinesData[0].occuranceDateString}}
         </div>
         <div class="timelineRight">
-            <div v-for="timelineData in timelinesData" :key="timelineData.occuranceDateString" xs4>              
+            <div v-for="timelineData in timelinesData" xs4>              
                  <div class= "timelineCapsuleContainer">
                     <div class ="timelineCapsuleLabel">{{timelineData.eventData.name}}</div> 
                     <div class ="timelineCapsuleValue">{{getReminderString(timelineData.reminderData)}}</div>
