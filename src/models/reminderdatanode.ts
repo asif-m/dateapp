@@ -39,7 +39,7 @@ export class ReminderDataNode {
         (this.days ? ' ' + this.days.toLocaleString() + ' D,' : '') +
         (this.hours ? ' ' + this.hours.toLocaleString() + ' hh,' : '') +
         (this.minutes ? ' ' + this.minutes.toLocaleString() + ' mm,' : '') +
-        (this.seconds ? ' ' + this.seconds.toLocaleString()+ ' ss,' : ''))
+        (this.seconds ? ' ' + this.seconds.toLocaleString() + ' ss,' : ''))
         .replace(/,\s*$/, '');
       this.id = id ? id : 'This day';
     }
