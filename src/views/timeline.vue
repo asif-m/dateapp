@@ -1,21 +1,16 @@
 <template>
-    <div>
-        <v-layout row>
-            <v-flex>
-                <v-card>
-                    <v-container fluid grid-list-xl>
-                        <v-layout row wrap>
-                            <v-flex v-for="timelinenodeData in this.$store.getters.timelineData" xs12>
-                                <div >
-                                    <TimelinePacketComponent :timelinesData=timelinenodeData></TimelinePacketComponent>
-                                </div>           
-                            </v-flex>
-                        </v-layout>
-                    </v-container>
-                </v-card>
-            </v-flex>
-        </v-layout>
-    </div>
+      <v-timeline align-top dense>
+        <v-timeline-item v-for="timelinenodeData in this.$store.getters.timelineData" 
+            color="rgba(102,51,153)" small>
+            <v-card>
+                <div class="timeline-card-date">{{timelinenodeData[0].occuranceDateString}}</div>
+                <div>
+                    <TimelinePacketComponent :timelinesData=timelinenodeData></TimelinePacketComponent>                    
+                </div>
+            </v-card>
+        </v-timeline-item>       
+      </v-timeline>
+
 </template>
 
 
@@ -51,4 +46,13 @@ export default class Timeline extends Vue {
 </script>
 
 <style lang='scss'>
+.timeline{
+    &-card{
+        &-date{
+            font-size : 14px;
+            text-align: left;
+            padding:10px;
+        }
+    }
+}
 </style>
