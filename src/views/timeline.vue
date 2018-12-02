@@ -20,7 +20,8 @@ import ReminderUtil from './../utils/reminderutil';
 import EventDataNode from './../models/eventdatanode';
 import {ReminderDataNode} from './../models/reminderdatanode';
 import TimelinePacketComponent from './../components/timelinepacket.vue';
-
+import DateUtil from './../utils/dateutil';
+import TimelineNodeData from './../models/timelinenodedata';
 @Component({
   components: {TimelinePacketComponent},
 })
@@ -39,8 +40,37 @@ export default class Timeline extends Vue {
         this.sortedReminders.sort((a: ReminderDataNode, b: ReminderDataNode) =>
             a.approximateDays === b.approximateDays ? 0 :
             (a.approximateDays > b.approximateDays ? -1 : 1));
-        this.$store.dispatch('addTimelineData',
-            ReminderUtil.getRemindersArray(this.sortedEvents , this.sortedReminders, new Date(), true, 20));
+        let data = ReminderUtil.getRemindersArray(this.sortedEvents , this.sortedReminders, new Date(), true, 20);
+        let today = new Date();
+        let todayApproxDays = DateUtil.getApproximateDays(
+                    today.getFullYear() - 1900,
+                    today.getMonth() + 1,
+                    0,
+                    today.getDate());
+        let lastClosest;
+        let lastClosestDateString;
+        data.forEach((timelineNodeData: TimelineNodeData) => {
+            if(!lastClosest && lastClosest !==0){
+                lastClosest = Math.abs(timelineNodeData.occuranceDaysSince1900 - todayApproxDays);
+                 lastClosestDateString = timelineNodeData.occuranceDateString;
+            }
+            if(lastClosest> Math.abs(timelineNodeData.occuranceDaysSince1900 - todayApproxDays)){
+                lastClosest = Math.abs(timelineNodeData.occuranceDaysSince1900 - todayApproxDays);
+                lastClosestDateString = timelineNodeData.occuranceDateString;
+            }
+        });             
+        if(lastClosestDateString){
+            setTimeout(() => {
+                let items = Array.prototype.slice.call(document.getElementsByClassName('timeline-card-date'))
+                    .filter(el => el.textContent.trim() === lastClosestDateString);                
+                if(items && items.length>0){                    
+                    items[0].scrollIntoView();
+                }   
+            }, 10000);
+             
+             
+        }
+        this.$store.dispatch('addTimelineData',data) ;
     }
 }
 </script>
