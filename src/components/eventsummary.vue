@@ -1,50 +1,28 @@
 <template>
-  <div>
-    <div class="cardsize">
-        <v-card>
-            <v-img>
-                <div class="cardcontainer">
-                    <div class="cardContentLeft">
-                        <div v-if="elapsedDuration" class>
-                            <InfoCapsuleComponent :label="'Y'" :value="elapsedDuration.years"/>
-                            <InfoCapsuleComponent :label="'M'" :value="elapsedDuration.months"/>
-                            <InfoCapsuleComponent :label="'W'" :value="elapsedDuration.weeks"/>
-                            <InfoCapsuleComponent :label="'D'" :value="elapsedDuration.days"/>
-                            <InfoCapsuleComponent :label="'hh'" :value="elapsedDuration.hours"/>
-                            <InfoCapsuleComponent :label="'mm'" :value="elapsedDuration.minutes"/>
-                            <InfoCapsuleComponent :label="'ss'" :value="elapsedDuration.seconds"/>
-                        </div>
-                    </div>
-                    <div class="cardContentRight">
-                         <div class ="cardEdit">
-                            <v-btn icon  v-on:click.native='removeEvent()'>
-                                <v-icon>more_horiz</v-icon>
-                            </v-btn>
-                        </div>
-                        <div class="cardIcon">
-                             <span  v-if="eventData.eventType === 'Birthday'">
-                                <v-icon style="color:red">cake</v-icon>
-                            </span>
-                            <span  v-else-if="eventData.eventType === 'Anniversary'">
-                                <v-icon style="color:green">people</v-icon>
-                            </span>
-                            <span  v-else></span>
-                        </div>
-                         <div class="cardHijriDate">
-                            <span class="cardHijriDateContent">{{eventData.hijriDate}}</span>
-                        </div>
-
-                        <div class="cardDate">
-                            {{eventData.date | formatDateTimeWithWeek}}</div>
-                        <div class="cardName">
-                            {{eventData.name}}
-                        </div>
-                    </div>
-                </div>
-            </v-img>
-        </v-card>
+  <div class ="eventsummary-container">
+      <div class ="eventsummary-container-inner">
+        <div class ="eventsummary-card-header">
+            <div class="eventsummary-card-header--name">
+                {{eventData.name}}
+            </div>
+            <div class="eventsummary-card-header--date-julian">
+                {{eventData.date | formatDateTimeWithWeek}}
+            </div>              
+            <div class="eventsummary-card-header--date-hijri">
+                {{eventData.hijriDate}}
+            </div>  
+        </div>
+        <div class ="eventsummary-card-content" v-if="elapsedDuration">         
+            <InfoCapsuleComponent :label="'Y'" :value="elapsedDuration.years"/>
+            <InfoCapsuleComponent :label="'M'" :value="elapsedDuration.months"/>
+            <InfoCapsuleComponent :label="'W'" :value="elapsedDuration.weeks"/>
+            <InfoCapsuleComponent :label="'D'" :value="elapsedDuration.days"/>
+            <InfoCapsuleComponent :label="'hh'" :value="elapsedDuration.hours"/>
+            <InfoCapsuleComponent :label="'mm'" :value="elapsedDuration.minutes"/>
+            <InfoCapsuleComponent :label="'ss'" :value="elapsedDuration.seconds"/>        
+        </div>    
     </div>
-</div>
+  </div>
 </template>
 
 <script lang='ts'>
@@ -82,57 +60,50 @@ export default class EventSummaryComponent extends Vue {
 </script>
 
 <style lang='scss'>
-$padding-capsule: 10px;
-.cardsize{
-    padding: 3px;
-    background: rebeccapurple;
-}
-.cardcontainer{
-    padding :10px;
-    display: flex;
-    flex-flow: row wrap;
-}
-.cardContentLeft{
-    flex: 1 0 calc(50%);
-}
-.cardContentRight{
-    flex: 1 0 calc(50%);
-}
-.cardEdit{
-    text-align: right;
-    height: 33px;
-}
-.cardIcon{
-    text-align: right;
-}
-.cardName{
+.eventsummary{
+    &-container{
+        min-width:220px;                
+        padding: 3px;
+        &-inner{
+            padding:3px;
+            background:blueviolet;
+        }
+    }
+    &-card{
+        &-header{
+            background: rebeccapurple;
+            color: white;
+            border-top-left-radius: 3px;
+            border-top-right-radius: 3px;
+            &--name{
+                font-size : 21px;                
+                text-align:left;
+                padding-left:10px;
+                padding-right:10px;
+            }
+            &--date{
+                &-julian{
+                    font-size : 14px;                
+                    text-align:left;
+                    padding-left:10px;
+                    padding-right:10px;
+                }
+                &-hijri{
+                    font-size : 12px;                
+                    text-align:left;                    
+                    background-color: green;
+                    padding-left:10px;
+                    padding-right:10px;     
+                    color:white;               
+                }
+            }
+        }
+        &-content{
+            background: rebeccapurple;
+            padding: 0px 3px 0px 3px;
+        }
 
-    text-align: center;
-    font-size: 30px;
-    position: absolute;
-    bottom: 0;
-    right: 8px;
-    width: 50%;
-    background-color: indianred;
-    border-radius: 7px;
-}
-.cardDate{
-    font-size: 20px;
-    text-align: right;
-    padding-top: 15px;
-}
-.cardHijriDate{
-    font-size: 15px;
-    text-align: right;
-    
-}
-.cardHijriDateContent{
-    font-size: 15px;
-    text-align: right;
-    background-color: green;
-    padding-left: 10px;
-    padding-right: 10px;
-    border-radius: 18px;
+    }
 }
 </style>
 

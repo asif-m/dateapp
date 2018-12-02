@@ -33,6 +33,7 @@ export default class InfoCapsuleComponent extends Vue {
     /* border-top-right-radius: 15px; */
     border-bottom-left-radius: 15px;
     width: 40px;
+    color: white;
 }
 .value{
     background: antiquewhite;

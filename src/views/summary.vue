@@ -1,21 +1,9 @@
 <template>
-    <div>
-        <v-layout row>
-            <v-flex>
-                <v-card>
-                    <v-container fluid grid-list-sm>
-                        <v-layout row wrap>
-                            <v-flex v-for="event in this.$store.getters.events" :key="event.id" xs4>
-                                <div>
-                                    <EventSummaryComponent :eventData=event>
-                                    </EventSummaryComponent>
-                                </div>
-                            </v-flex>
-                        </v-layout>
-                    </v-container>
-                </v-card>
-            </v-flex>
-        </v-layout>
+    <div class ="summary-container">
+        <div v-for="event in this.$store.getters.events" :key="event.id" class= "summary-items">
+            <EventSummaryComponent :eventData=event>
+            </EventSummaryComponent>
+        </div>
     </div>
 </template>
 
@@ -31,5 +19,14 @@ export default class Summary extends Vue {
 </script>
 
 <style lang='scss'>
+.summary{
+    &-container{
+        display:flex;        
+        flex-wrap: wrap;
+    }
+    &-items{
+        flex: 1 1 0;
+    }
+}
 </style>
 
