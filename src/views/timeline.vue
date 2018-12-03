@@ -1,17 +1,12 @@
 <template>
-      <v-timeline align-top dense>
-        <v-timeline-item v-for="timelinenodeData in this.$store.getters.timelineData" 
-            color="rgba(138,43,226 ,1 )" small>
-            <div class="timeline-container">
-                <div class="timeline-date">{{timelinenodeData[0].occuranceDateString}}</div>
-                <div class="timeline-card">
-                    <TimelinePacketComponent :timelinesData=timelinenodeData></TimelinePacketComponent>
-                </div>
-            </div>
-            
-        </v-timeline-item>       
-      </v-timeline>
-
+    <div class="timeline-container">
+        <div class="timeline-fall-container">
+            <TimelineFallComponent></TimelineFallComponent>
+        </div>
+        <div class="timeline-filter-container">
+            <TimelineFilterComponent></TimelineFilterComponent>
+        </div>
+    </div>
 </template>
 
 
@@ -20,11 +15,12 @@ import { Component, Prop, Vue } from 'vue-property-decorator';
 import ReminderUtil from './../utils/reminderutil';
 import EventDataNode from './../models/eventdatanode';
 import {ReminderDataNode} from './../models/reminderdatanode';
-import TimelinePacketComponent from './../components/timelinepacket.vue';
+import TimelineFallComponent from './../components/timelinefall.vue';
+import TimelineFilterComponent from './../components/timelinefilter.vue';
 import DateUtil from './../utils/dateutil';
 import TimelineNodeData from './../models/timelinedatanode';
 @Component({
-  components: {TimelinePacketComponent},
+  components: {TimelineFallComponent, TimelineFilterComponent},
 })
 export default class Timeline extends Vue {
     private sortedEvents: EventDataNode[];
@@ -75,27 +71,23 @@ export default class Timeline extends Vue {
 </script>
 
 <style lang='scss'>
-.v-timeline-item{
-    padding-top:5px;
-    padding-bottom: 10px;
-}
-.v-timeline--dense .v-timeline-item__body {
-    max-width: calc(100% - 30px);
-}
 .timeline{
     &-container{
         display:flex;
+        scroll:none;
     }
-    &-date{
-            font-size : 14px;
-            text-align: left;
-            padding-top: 9px;
-            padding-left: 10px;
-            width:150px;
-            color:white;
-        }
-    &-card{
-        padding-top: 5px;
+    &-fall-container{
+        
+    }
+    &-filter-container{
+        color: white;
+        position: fixed;
+        top: 0px;
+        right: 0px;
+        height: 100%;
+        overflow: auto;
     }
 }
+
+
 </style>

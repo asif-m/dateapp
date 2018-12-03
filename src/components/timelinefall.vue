@@ -1,0 +1,42 @@
+<template>
+      <v-timeline align-top dense>
+        <v-timeline-item v-for="timelinenodeData in this.$store.getters.timelineData" color="rgba(138,43,226 ,1 )" small>
+            <div class="timelinefall-container">
+                <div class="timelinefall-date">{{timelinenodeData[0].occuranceDateString}}</div>
+                <div class="timelinefall-card">
+                    <TimelinePacketComponent :timelinesData=timelinenodeData></TimelinePacketComponent>
+                </div>
+            </div>
+        </v-timeline-item>       
+      </v-timeline>
+</template>
+
+<script lang='ts'>
+import { Component, Vue } from 'vue-property-decorator';
+import TimelinePacketComponent from './../components/timelinepacket.vue';
+
+@Component({
+  components: {TimelinePacketComponent},
+})
+export default class TimelineFallComponent extends Vue {
+}
+</script>
+
+<style lang='scss'>
+.timelinefall{
+    &-container{
+        display:flex;
+    }
+    &-date{
+            font-size : 14px;
+            text-align: left;
+            padding-top: 9px;
+            padding-left: 10px;
+            width:150px;
+            color:white;
+        }
+    &-card{
+        padding-top: 5px;
+    }
+}
+</style>
