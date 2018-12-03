@@ -1,13 +1,14 @@
 <template>
       <v-timeline align-top dense>
         <v-timeline-item v-for="timelinenodeData in this.$store.getters.timelineData" 
-            color="rgba(102,51,153)" small>
-            <v-card>
-                <div class="timeline-card-date">{{timelinenodeData[0].occuranceDateString}}</div>
-                <div>
-                    <TimelinePacketComponent :timelinesData=timelinenodeData></TimelinePacketComponent>                    
+            color="rgba(138,43,226 ,1 )" small>
+            <div class="timeline-container">
+                <div class="timeline-date">{{timelinenodeData[0].occuranceDateString}}</div>
+                <div class="timeline-card">
+                    <TimelinePacketComponent :timelinesData=timelinenodeData></TimelinePacketComponent>
                 </div>
-            </v-card>
+            </div>
+            
         </v-timeline-item>       
       </v-timeline>
 
@@ -76,14 +77,25 @@ export default class Timeline extends Vue {
 <style lang='scss'>
 .v-timeline-item{
     padding-top:5px;
+    padding-bottom: 10px;
+}
+.v-timeline--dense .v-timeline-item__body {
+    max-width: calc(100% - 30px);
 }
 .timeline{
-    &-card{
-        &-date{
+    &-container{
+        display:flex;
+    }
+    &-date{
             font-size : 14px;
             text-align: left;
-            padding:10px;
+            padding-top: 9px;
+            padding-left: 10px;
+            width:150px;
+            color:white;
         }
+    &-card{
+        padding-top: 5px;
     }
 }
 </style>

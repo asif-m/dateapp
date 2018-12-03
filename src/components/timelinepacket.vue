@@ -49,6 +49,7 @@ export default class TimelinePacketComponent extends Vue {
     border-top-left-radius: 15px;
     /* border-top-right-radius: 15px; */
     border-bottom-left-radius: 15px;    
+    color:white;
 }
 .timelineCapsuleValue{
     background: antiquewhite;
