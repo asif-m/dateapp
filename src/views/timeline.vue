@@ -74,6 +74,9 @@ export default class Timeline extends Vue {
 </script>
 
 <style lang='scss'>
+.v-timeline-item{
+    padding-top:5px;
+}
 .timeline{
     &-card{
         &-date{
