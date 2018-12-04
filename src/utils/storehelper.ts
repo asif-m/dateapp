@@ -1,11 +1,16 @@
 import EventDataNode from '../models/eventdatanode';
+import { ReminderDataNode } from '../models/reminderdatanode';
 import UniqueIDUtil from './uniqueidutil';
+import DateUtil from './dateutil';
 import MONTH from '../constants/month';
 import EVENTTYPE from '../constants/eventtype';
 import RandomGeneratorUtil from '../utils/randomgenutil';
 import DefaultReminders from '../defaults/defaultreminder';
+import { HashedDoubleLinkedList } from '../models/timeline/hasheddoublelinkedlist';
 
 export default class StoreHelper {
+    public static events: any;
+    public static reminders: any;
     public static initialize(store: any) {
         StoreHelper.initEvents(store);
         StoreHelper.initReminders(store);
@@ -26,8 +31,20 @@ export default class StoreHelper {
           ),
         );
     }
+    public static getEventOccurances(events: EventDataNode[], reminders: ReminderDataNode[]): HashedDoubleLinkedList {
+        const list = new HashedDoubleLinkedList();
+        events.forEach((event: EventDataNode) => {
+            reminders.forEach((reminder: ReminderDataNode) => {
+                const eventOccuranceData = {event, reminder};
+                const date = DateUtil.addReminderToDate(event.date, reminder);
+                list.addOrUpdateEventOccurance(date, eventOccuranceData);
+            });
+        });
+        return list;
+    }
+
     private static initEvents(store: any) {
-        store.dispatch('initList', [
+        StoreHelper.events = [
             // new EventDataNode(UniqueIDUtil.generate(), 'Today',
             //     new Date()),
             new EventDataNode(UniqueIDUtil.generate(), 'Asif',
@@ -66,7 +83,8 @@ export default class StoreHelper {
             //     new Date(RandomGeneratorUtil.generate(1970, 2018), MONTH.NOV, 12), EVENTTYPE.ANNIVERSARY),
             // new EventDataNode(UniqueIDUtil.generate(), 'Random in DEC',
             //     new Date(RandomGeneratorUtil.generate(1970, 2018), MONTH.DEC, 12), EVENTTYPE.ANNIVERSARY),
-            ]);
+            ];
+        store.dispatch('initList', StoreHelper.events);
     }
     private static getRandomEventType() {
         switch (RandomGeneratorUtil.generate(0, 2)) {
@@ -76,8 +94,8 @@ export default class StoreHelper {
         }
     }
     private static initReminders(store: any) {
-        const result =
-            Object.keys(DefaultReminders).reduce((accumulator, data) => accumulator.concat(DefaultReminders[data]), []);
-        store.dispatch('initReminders', result);
+        StoreHelper.reminders = Object.keys(DefaultReminders)
+            .reduce((accumulator, data) => accumulator.concat(DefaultReminders[data]), []);
+        store.dispatch('initReminders', StoreHelper.reminders);
     }
   }

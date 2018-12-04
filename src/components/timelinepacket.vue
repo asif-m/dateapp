@@ -1,9 +1,9 @@
 <template>
     <div>                
-        <div v-for="timelineData in timelinesData">              
+        <div v-for="timelineData in eventOccuranceData">              
                 <div class= "timelineCapsuleContainer">
                 <div class ="timelineCapsuleLabel">{{timelineData.eventData.name}}</div> 
-                <div class ="timelineCapsuleValue">{{getReminderString(timelineData.reminderData)}}</div>
+                <div class ="timelineCapsuleValue">{{getReminderString(timelineData.reminder)}}</div>
             </div>
         </div>        
     </div>
@@ -11,12 +11,12 @@
 
 <script lang='ts'>
 import { Component, Prop, Vue } from 'vue-property-decorator';
-import TimelineDataNode from '../models/timelinedatanode';
+import { IEventOccurance } from '../models/timeline/timelineeventnode';
 import { ReminderDataNode } from '../models/reminderdatanode';
 @Component({
 })
 export default class TimelinePacketComponent extends Vue {
-    @Prop() private timelinesData: TimelineDataNode[];
+    @Prop() private eventOccuranceData: IEventOccurance[];
     public getReminderString(reminder: ReminderDataNode) {
         return reminder.toString();
     }

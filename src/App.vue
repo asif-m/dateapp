@@ -52,7 +52,8 @@ export default class App extends Vue {
      StoreHelper.addRandomEvent(this.$store);
   }
   private _initStore() {
-      StoreHelper.initialize(this.$store);
+      StoreHelper.initialize(this.$store);      
+      let result = StoreHelper.getEventOccurances(StoreHelper.events, StoreHelper.reminders);
   }
 }
 </script>
