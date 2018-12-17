@@ -5,6 +5,7 @@ import DateUtil from './../../utils/dateutil';
 export interface IEventOccurance {
     event: EventDataNode;
     reminder: ReminderDataNode;
+    id: string;
 }
 export class TimelineEventNode {
     public readonly eventOccurenaces: IEventOccurance[];

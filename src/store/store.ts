@@ -7,6 +7,7 @@ export default new Vuex.Store({
   state: {
     events: [],
     reminders : [],
+    currenttimeline : [],
   },
   mutations: {
     initList(state, events: []) {
@@ -35,6 +36,9 @@ export default new Vuex.Store({
     initReminders(state, reminders: []) {
       state.reminders = reminders;
     },
+    setCurrentTimelineList(state, currenttimeline: []) {
+      state.currenttimeline = currenttimeline;
+    },
   },
   actions: {
     initList({ commit }, events) {
@@ -52,9 +56,13 @@ export default new Vuex.Store({
     initReminders({ commit }, reminders) {
       commit('initReminders', reminders);
     },
+    setCurrentTimelineList({ commit }, currenttimeline: []) {
+      commit('setCurrentTimelineList', currenttimeline);
+    },
   },
   getters: {
     events: (state) => state.events,
     reminders : (state) => state.reminders,
+    currenttimeline: (state) => state.currenttimeline,
   },
 });

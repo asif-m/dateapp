@@ -49,11 +49,10 @@ export default class App extends Vue {
       this.$router.push({path});
   }
   public addEvent() {
-     StoreHelper.addRandomEvent(this.$store);
+     StoreHelper.addRandomEvent();
   }
   private _initStore() {
-      StoreHelper.initialize(this.$store);      
-      let result = StoreHelper.getEventOccurances(StoreHelper.events, StoreHelper.reminders);
+      StoreHelper.initialize(this.$store);
   }
 }
 </script>

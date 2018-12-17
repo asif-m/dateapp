@@ -102,6 +102,15 @@ export class HashedDoubleLinkedList {
         };
         return this.getkItemsFromNode(prevNode, k, result);
     }
+    public toArray() {
+        let node = this.head;
+        let result = [];
+        while (node !== null) {
+            result.push(node.data);
+            node = node.next;
+        }
+        return result;
+    }
     private getkItemsFromNode(prevNode: DoubleLinkedListNode , k: number, result: ITimelineData):ITimelineData {
         for (let i = 0; i < k; i++) {
             result.timelineData.push(prevNode);
