@@ -1,14 +1,14 @@
 <template>
-      <v-timeline align-top dense>
-        <v-timeline-item v-for="timelinenodedata in this.$store.getters.currenttimeline" 
-            :key="timelinenodedata.id" color="rgba(138,43,226 ,1 )" small>
-            <div class="timelinefall-container">
-                <div class="timelinefall-date">{{timelinenodedata.occuranceDateString}}</div>
-                <div class="timelinefall-card">
-                    <TimelinePacketComponent :eventOccurenaces=timelinenodedata.eventOccurenaces></TimelinePacketComponent>
+      <v-timeline align-top dense>        
+            <v-timeline-item v-for="timelinenodedata in this.$store.getters.currenttimeline"
+                :key="timelinenodedata.id" color="rgba(138,43,226 ,1 )" small>
+                <div class="timelinefall-container">
+                    <div class="timelinefall-date">{{timelinenodedata.occuranceDateString}}</div>
+                    <div class="timelinefall-card">
+                        <TimelinePacketComponent :eventOccurenaces=timelinenodedata.eventOccurenaces></TimelinePacketComponent>
+                    </div>
                 </div>
-            </div>
-        </v-timeline-item>       
+            </v-timeline-item>
       </v-timeline>
 </template>
 
@@ -20,6 +20,20 @@ import TimelinePacketComponent from './../components/timelinepacket.vue';
   components: {TimelinePacketComponent},
 })
 export default class TimelineFallComponent extends Vue {
+    public mounted() {
+        window.addEventListener('scroll', this.handleScroll);
+        window.addEventListener('keyup', this.handleKeyUp);
+    }
+    public beforeDestroy() {
+        window.removeEventListener('scroll', this.handleScroll);
+        window.removeEventListener('keyup', this.handleKeyUp);
+    }
+    public handleScroll() {
+        // console.log(arguments);
+    }
+    public handleKeyUp() {
+        // console.log(arguments);
+    }
 }
 </script>
 
