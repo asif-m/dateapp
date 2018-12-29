@@ -49,11 +49,12 @@ export default class App extends Vue {
       TimerUtil.beginTimer();
   }
   public mounted() {
-      this.$router.afterEach((to, from) => {
-          switch(to.name) {
-            case this.ROUTE_SUMMARY: this.activeBtn = 0;
-            case this.ROUTE_TIMELINE: this.activeBtn = 1;
-            case this.ROUTE_SETTINGS: this.activeBtn = 2;
+      this.$router.beforeEach((to, from) => {
+          switch (to.name) {
+            default: // fallsthrough
+            case this.ROUTE_SUMMARY: this.activeBtn = 0; break;
+            case this.ROUTE_TIMELINE: this.activeBtn = 1; break;
+            case this.ROUTE_SETTINGS: this.activeBtn = 2; break;
         }
       });
   }

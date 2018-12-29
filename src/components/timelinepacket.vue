@@ -16,7 +16,7 @@ import { ReminderDataNode } from '../models/reminderdatanode';
 @Component({
 })
 export default class TimelinePacketComponent extends Vue {
-    @Prop() public eventOccurenaces: IEventOccurance[];    
+    @Prop() public eventOccurenaces: IEventOccurance[];
 }
 </script>
 

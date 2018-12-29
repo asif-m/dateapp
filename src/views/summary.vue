@@ -24,9 +24,9 @@ export default class Summary extends Vue {
         display:flex;        
         flex-wrap: wrap;
     }
-    &-items{
-        //flex: 1 1 0;
-    }
+    // &-items{
+    //     //flex: 1 1 0;
+    // }
 }
 </style>
 

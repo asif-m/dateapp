@@ -7,6 +7,7 @@ export default new Vuex.Store({
   state: {
     events: [],
     reminders : [],
+    completetimeline: [],
     currenttimeline : [],
   },
   mutations: {
@@ -36,6 +37,9 @@ export default new Vuex.Store({
     initReminders(state, reminders: []) {
       state.reminders = reminders;
     },
+    setCompleteTimeline(state, completetimeline: []) {
+      state.completetimeline = completetimeline;
+    },
     setCurrentTimelineList(state, currenttimeline: []) {
       state.currenttimeline = currenttimeline;
     },
@@ -56,6 +60,9 @@ export default new Vuex.Store({
     initReminders({ commit }, reminders) {
       commit('initReminders', reminders);
     },
+    setCompleteTimeline({ commit }, completetimeline: []) {
+      commit('setCompleteTimeline', completetimeline);
+    },
     setCurrentTimelineList({ commit }, currenttimeline: []) {
       commit('setCurrentTimelineList', currenttimeline);
     },
@@ -63,6 +70,7 @@ export default new Vuex.Store({
   getters: {
     events: (state) => state.events,
     reminders : (state) => state.reminders,
+    completetimeline : (state) => state.completetimeline,
     currenttimeline: (state) => state.currenttimeline,
   },
 });

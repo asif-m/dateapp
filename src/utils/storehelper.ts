@@ -105,6 +105,8 @@ export default class StoreHelper {
     }
     private static initTimeline() {
         const eventOccurances = StoreHelper.getEventOccurances(StoreHelper.events, StoreHelper.reminders);
-        StoreHelper.store.dispatch('setCurrentTimelineList', eventOccurances.toArray());
+        const eventOccurancesArray = eventOccurances.toArray();
+        StoreHelper.store.dispatch('setCurrentTimelineList', eventOccurancesArray);
+        StoreHelper.store.dispatch('setCurrentTimelineList', eventOccurancesArray);
     }
   }

@@ -17,21 +17,21 @@ import EventDataNode from '@/models/eventdatanode';
 @Component
 export default class TimelineFilterComponent extends Vue {
     private date: string;
-    private showDatePickerMenu: Boolean;
-    private selectedEvents:any[];
+    private showDatePickerMenu: boolean;
+    private selectedEvents: any[];
     constructor() {
         super();
         this.date = new Date().toISOString().substr(0, 10);
         this.showDatePickerMenu = false;
-        this.selectedEvents=  this.$store.getters.events.map((event : EventDataNode) => event.id);
+        this.selectedEvents = this.$store.getters.events.map((event: EventDataNode) => event.id);
     }
     @Watch('date')
     private triggerDateChanged(date: string) {
-        console.log(date);
+        // console.log(date);
     }
     @Watch('selectedEvents')
-    private triggerEventSelectionChanged(selectedEvents: Array<String>) {
-        console.log(selectedEvents);
+    private triggerEventSelectionChanged(selectedEvents: string[]) {
+        // console.log(selectedEvents);
     }
 }
 </script>
