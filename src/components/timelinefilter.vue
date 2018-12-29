@@ -12,28 +12,26 @@
 </template>
 
 <script lang='ts'>
-import { Component, Vue } from 'vue-property-decorator';
-@Component({
-    data: function() {
-        return {
-            date: new Date().toISOString().substr(0, 10),
-            showDatePickerMenu: false,
-            selectedEvents: this.$store.getters.events.map((event) => event.id),
-        };
-    },
-    watch: {
-        date: function(date) {
-            this.triggerDateChanged(date);
-        },
-        selectedEvents: function(selectedEvents) {
-            this.triggerEventSelectionChanged(selectedEvents);
-        },
-    },
-})
+import { Component, Vue, Watch } from 'vue-property-decorator';
+import EventDataNode from '@/models/eventdatanode';
+@Component
 export default class TimelineFilterComponent extends Vue {
-    private triggerDateChanged(date: string) {
+    private date: string;
+    private showDatePickerMenu: Boolean;
+    private selectedEvents:any[];
+    constructor() {
+        super();
+        this.date = new Date().toISOString().substr(0, 10);
+        this.showDatePickerMenu = false;
+        this.selectedEvents=  this.$store.getters.events.map((event : EventDataNode) => event.id);
     }
-    private triggerEventSelectionChanged(selectedEvents: []) {
+    @Watch('date')
+    private triggerDateChanged(date: string) {
+        console.log(date);
+    }
+    @Watch('selectedEvents')
+    private triggerEventSelectionChanged(selectedEvents: Array<String>) {
+        console.log(selectedEvents);
     }
 }
 </script>

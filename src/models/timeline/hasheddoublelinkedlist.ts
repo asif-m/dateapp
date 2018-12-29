@@ -2,7 +2,7 @@ import DoubleLinkedListNode from './doublelinkedlistnode';
 import DateHashMap from './datehashmap';
 import {IEventOccurance, TimelineEventNode} from './timelineeventnode';
 
-export interface ITimelineData{
+export interface ITimelineData {
     timelineData: DoubleLinkedListNode[];
     reachedEnd: boolean;
     reachedBeginning: boolean;
@@ -104,14 +104,14 @@ export class HashedDoubleLinkedList {
     }
     public toArray() {
         let node = this.head;
-        let result = [];
+        const result = [];
         while (node !== null) {
             result.push(node.data);
             node = node.next;
         }
         return result;
     }
-    private getkItemsFromNode(prevNode: DoubleLinkedListNode , k: number, result: ITimelineData):ITimelineData {
+    private getkItemsFromNode(prevNode: DoubleLinkedListNode , k: number, result: ITimelineData): ITimelineData {
         for (let i = 0; i < k; i++) {
             result.timelineData.push(prevNode);
             if (prevNode.next === null) {
