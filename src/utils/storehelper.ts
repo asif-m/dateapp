@@ -97,7 +97,10 @@ export default class StoreHelper {
     }
     private static initReminders() {
         StoreHelper.reminders = Object.keys(DefaultReminders)
-            .reduce((accumulator, data) => accumulator.concat(DefaultReminders[data]), []);
+            .reduce((accumulator, data) => accumulator.concat(
+                DefaultReminders[data].filter((vLeft: ReminderDataNode, index: number) =>
+                    DefaultReminders[data].findIndex((vRight: ReminderDataNode) => vRight.id === vLeft.id) === index))
+            , []);
         StoreHelper.store.dispatch('initReminders', StoreHelper.reminders);
     }
     private static initTimeline() {

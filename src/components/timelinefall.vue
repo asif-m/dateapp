@@ -1,7 +1,7 @@
 <template>
       <v-timeline align-top dense>
         <v-timeline-item v-for="timelinenodedata in this.$store.getters.currenttimeline" 
-            :key="timelinenodedata.daysSince1900" color="rgba(138,43,226 ,1 )" small>
+            :key="timelinenodedata.id" color="rgba(138,43,226 ,1 )" small>
             <div class="timelinefall-container">
                 <div class="timelinefall-date">{{timelinenodedata.occuranceDateString}}</div>
                 <div class="timelinefall-card">
