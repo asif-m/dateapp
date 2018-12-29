@@ -26,7 +26,10 @@ export default class Timeline extends Vue {
 .timeline{
     &-container{
         display:flex;
-    }    
+    }   
+    &-fall-container{
+        width:100%;
+    } 
     &-filter-container{
         color: white;
         position: fixed;
