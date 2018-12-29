@@ -13,15 +13,15 @@
                     <v-icon>add</v-icon>
                 </v-btn>
                 <v-bottom-nav :active.sync='activeBtn' :value='true' absolute color='transparent'>
-                    <v-btn flat color='teal' v-on:click.native='navigateToURL("summary")'>
+                    <v-btn flat color='teal' v-on:click.native='navigateToURL(ROUTE_SUMMARY)'>
                         <span>Summary</span>
                         <v-icon>home</v-icon>
                     </v-btn>
-                    <v-btn flat color='teal'  v-on:click.native='navigateToURL("timeline")'>
+                    <v-btn flat color='teal'  v-on:click.native='navigateToURL(ROUTE_TIMELINE)'>
                         <span>Timeline</span>
                         <v-icon>waves</v-icon>
                     </v-btn>
-                    <v-btn flat color='teal'  v-on:click.native='navigateToURL("settings")'>
+                    <v-btn flat color='teal'  v-on:click.native='navigateToURL(ROUTE_SETTINGS)'>
                         <span>Settings</span>
                         <v-icon>settings</v-icon>
                     </v-btn>
@@ -38,12 +38,24 @@ import StoreHelper from './utils/storehelper';
 
 @Component
 export default class App extends Vue {
+  private ROUTE_SUMMARY = 'summary';
+  private ROUTE_TIMELINE = 'timeline';
+  private ROUTE_SETTINGS = 'settings';
   private activeBtn: number;
   constructor() {
       super();
       this.activeBtn = 0;
       this._initStore();
       TimerUtil.beginTimer();
+  }
+  public mounted() {
+      this.$router.afterEach((to, from) => {
+          switch(to.name) {
+            case this.ROUTE_SUMMARY: this.activeBtn = 0;
+            case this.ROUTE_TIMELINE: this.activeBtn = 1;
+            case this.ROUTE_SETTINGS: this.activeBtn = 2;
+        }
+      });
   }
   public navigateToURL(path: string) {
       this.$router.push({path});
