@@ -97,7 +97,7 @@ export default class DateUtil {
     }
     public static getHijriDateTime(date: Date, adjustments = 0) {
         const hijriDate = DateUtil.calculateHijriDate(date, adjustments);
-        return  hijriDate.day + ' ' + DateUtil.getHijriMonthName(hijriDate.month) + ' ' + hijriDate.year;
+        return  (hijriDate.day - 1) + ' ' + DateUtil.getHijriMonthName(hijriDate.month) + ' ' + hijriDate.year;
     }
     public static formatDate(date: Date) {
       return DateUtil.getZeroAppendedString(date.getDate()) + ' ' +
