@@ -17,6 +17,10 @@
         >
           <div>
             {{ item.occuranceDateString }}
+          </div>          
+          <div v-for="eventOccurance in item.eventOccurenaces" :key="eventOccurance.id">
+              <div class ="timelineCapsuleLabel">{{eventOccurance.event.name}}</div> 
+              <div class ="timelineCapsuleValue">{{eventOccurance.reminder.toString()}}</div>
           </div>
         </DynamicScrollerItem>
       </template>
@@ -25,7 +29,6 @@
 </template>
 
 <script>
-
 export default {
 }
 </script>
